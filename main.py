@@ -9,3 +9,7 @@ collection = db["restaurants"]
 print("Alle Stadtbezirke:")
 for borough in collection.distinct("borough"):
     print("- " + borough)
+
+print("Top 3 restaurants mit höchstem Rating:")
+for restaurant in collection.find().sort("grades.0.score", -1).limit(3):
+    print("- " + restaurant["name"] + " (Rating " + str(restaurant["grades"][0]["score"]) + ")")
